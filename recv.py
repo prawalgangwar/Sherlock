@@ -8,18 +8,19 @@ s.listen(5)
 
 while True:
 	conn, addr = s.accept()
-	 print 'Got connection from', addr
-with open('received_image.jpg', 'wb') as f:
+	print 'Got connection from', addr
+	f = open('received_image.jpg', 'wb')
     print 'file opened'
     while True:
         print('receiving data...')
         data = conn.recv(1024)
         if not data:
             break
-        # write data to a file
+        # write data to a filex
         f.write(data)
+        f.close()
 
-f.close()
+
 print('Successfully get the file')
 s.close()
 print('connection closed')
