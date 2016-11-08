@@ -2,13 +2,14 @@ import sys
 import time
 import telepot
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardHide 
-import  RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import picamera
 import Adafruit_CharLCD as LCD
 
 note = False
 i = 0
 chat_id = 0
+
 def on_chat_message(msg):
     global note, chat_id
     content_type, chat_type, chat_id = telepot.glance(msg)
@@ -33,7 +34,9 @@ def on_chat_message(msg):
       elif (msg['text'] == "Leave Note"): 
         bot.sendMessage(chat_id,'Note to be written:', reply_markup=keyboard_off)
         note = True
-
+      else 
+        
+        
     else:
       lcd.clear()
       lcd.message(msg['text'])
@@ -80,7 +83,7 @@ lcd_rows    = 2
 lcd = LCD.Adafruit_CharLCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7,
                            lcd_columns, lcd_rows, lcd_backlight)
 
-lcd.message('Welcome to Prakhar\'s place')
+lcd.message('Welcome to Sherlock\'s mind palace :P')
 
 camera = picamera.PiCamera()
 
