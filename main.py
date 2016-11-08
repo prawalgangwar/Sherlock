@@ -5,15 +5,38 @@ from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboa
 import  RPi.GPIO as GPIO
 import picamera
 import Adafruit_CharLCD as LCD
+import pyqrcode
+import qrtools
 
 note = False
 i = 0
 chat_id = 0
+
+#generates and saves the QR code for the entry id with timestamp
+def generate_qr_code(id):
+    qr = pyqrcode.create(id)
+    qr.png(id+".png", scale=6)
+
+#extracts data from the read QR code image  
+def read_qr_code(qr_recvd):
+    qr = qrtools.QR()
+    qr.decode(qr_recvd)
+    id_recvd =  qr.data
+    if(search(id_recvd)):
+        #grant access if the timestamp is not too old
+    else:
+        #display an error and inform the master user
+        
+#extract the QR code from a big image 
+def extract_QR(input_image):
+    #TODO
+    print "Extracting QR from input"   
+
 def on_chat_message(msg):
     global note, chat_id
     content_type, chat_type, chat_id = telepot.glance(msg)
 
-    keyboard_on = ReplyKeyboardMarkup(keyboard=[
+    keyboard_on = ReplyKeyboardMarkup(keyboard=[    
                     [KeyboardButton(text='Open Sherlock')], [KeyboardButton(text='Close Sherlock')], [KeyboardButton(text='Leave Note')] ])
 
     keyboard_off = ReplyKeyboardHide(hide_keyboard=True)
